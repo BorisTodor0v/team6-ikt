@@ -2,6 +2,7 @@ package com.finki.ikt.team6.controller.rest;
 
 import com.finki.ikt.team6.model.Role;
 import com.finki.ikt.team6.model.User;
+import com.finki.ikt.team6.model.dto.user.UserDetailsDTO;
 import com.finki.ikt.team6.model.dto.user.UserEditDTO;
 import com.finki.ikt.team6.model.dto.user.UserRegisterDTO;
 import com.finki.ikt.team6.model.exceptions.*;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-//@CrossOrigin(origins = (ADD ORIGINS HERE, URL OF REACT APP) )
+@CrossOrigin(origins = {"http://localhost:3000"})
 @RequestMapping("/api/users")
 public class UserRestController {
 
@@ -38,7 +39,7 @@ public class UserRestController {
     @GetMapping("/{username}")
     public ResponseEntity<?> findByUsername(@PathVariable String username){
         try{
-            User user = this.userService.findByUsername(username);
+            UserDetailsDTO user = this.userService.findByUsername(username);
             return new ResponseEntity<>(user, HttpStatus.FOUND);
         } catch (UsernameDoesNotExistException e){
             return ResponseEntity.status(e.getStatus()).body(e.getMessage());
@@ -51,13 +52,13 @@ public class UserRestController {
      * If the provided username or password is invalid, or the passwords do not match, an HTTP status of "BAD_REQUEST" is returned and a new user is not created.
      * If the provided username already belongs to an existing user, an HTTP status of "CONFLICT" is returned and a new user is not created.
      * Additionally, for each condition that the form is invalid, an appropriate error message is returned to display what is the problem.
-     * @param userRegisterDTO Currently contains username, password and password confirmation
+     * @param userRegisterDTO Contains all relevant user information
      * @return ResponseEntity based on validity of credentials
      */
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody UserRegisterDTO userRegisterDTO){
         try{
-            User user = this.userService.register(userRegisterDTO.getUsername(), userRegisterDTO.getPassword(), userRegisterDTO.getRepeatPassword(), Role.USER);
+            User user = this.userService.register(userRegisterDTO, Role.USER);
             return new ResponseEntity<>(user, HttpStatus.CREATED);
         } catch (InvalidUsernameOrPasswordException e){
             return ResponseEntity.status(e.getStatus()).body(e.getMessage());
@@ -76,7 +77,7 @@ public class UserRestController {
      */
     /**
      * @param username Which users info is being edited
-     * @param userEditDTO Currently provides only a role
+     * @param userEditDTO The users new information after editing
      * @return Updated user information
      */
     @PutMapping("/{username}/edit")

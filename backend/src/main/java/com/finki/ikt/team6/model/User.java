@@ -22,6 +22,12 @@ public class User implements UserDetails {
     @Enumerated(value = EnumType.STRING)
     private Role role;
 
+    private String name;
+    private String surname;
+    private String email;
+    private String address;
+    private double grade;
+
     private boolean isAccountNonExpired = true;
     private boolean isAccountNonLocked = true;
     private boolean isCredentialsNonExpired =  true;
