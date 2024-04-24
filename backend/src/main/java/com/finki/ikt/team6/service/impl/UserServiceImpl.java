@@ -2,7 +2,9 @@ package com.finki.ikt.team6.service.impl;
 
 import com.finki.ikt.team6.model.Role;
 import com.finki.ikt.team6.model.User;
+import com.finki.ikt.team6.model.dto.user.UserDetailsDTO;
 import com.finki.ikt.team6.model.dto.user.UserEditDTO;
+import com.finki.ikt.team6.model.dto.user.UserRegisterDTO;
 import com.finki.ikt.team6.model.exceptions.InvalidUsernameOrPasswordException;
 import com.finki.ikt.team6.model.exceptions.PasswordsDoNotMatchException;
 import com.finki.ikt.team6.model.exceptions.UsernameAlreadyExistsException;
@@ -36,20 +38,27 @@ public class UserServiceImpl implements UserService {
                 Otherwise key functionality in the app breaks.
     */
     @Override
-    public User register(String username, String password, String repeatPassword, Role role) {
-        if (username == null || password == null || username.isEmpty() || password.isEmpty()) {
+    public User register(UserRegisterDTO userRegisterDTO, Role role) {
+
+        if (userRegisterDTO.getUsername() == null || userRegisterDTO.getPassword() == null
+                || userRegisterDTO.getUsername().isEmpty() || userRegisterDTO.getPassword().isEmpty()) {
             throw new InvalidUsernameOrPasswordException();
         }
 
-        if (!password.equals(repeatPassword)) {
+        if (!userRegisterDTO.getPassword().equals(userRegisterDTO.getRepeatPassword())) {
             throw new PasswordsDoNotMatchException();
         }
 
-        if(this.userRepository.findByUsername(username).isPresent()) {
-            throw new UsernameAlreadyExistsException(username);
+        if(this.userRepository.findByUsername(userRegisterDTO.getUsername()).isPresent()) {
+            throw new UsernameAlreadyExistsException(userRegisterDTO.getUsername());
         }
 
-        User user = new User(username, passwordEncoder.encode(password), role);
+        User user = new User(userRegisterDTO.getUsername(), passwordEncoder.encode(userRegisterDTO.getPassword()), role);
+
+        user.setName(userRegisterDTO.getName());
+        user.setSurname(userRegisterDTO.getSurname());
+        user.setEmail(userRegisterDTO.getEmail());
+        user.setAddress(userRegisterDTO.getAddress());
 
         return userRepository.save(user);
     }
@@ -60,8 +69,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findByUsername(String username) {
-        return userRepository.findByUsername(username).orElseThrow(()->new UsernameDoesNotExistException(username));
+    public UserDetailsDTO findByUsername(String username) {
+        User user = userRepository.findByUsername(username).orElseThrow(()->new UsernameDoesNotExistException(username));
+        return UserDetailsDTO.of(user);
     }
 
     @Override
@@ -69,6 +79,10 @@ public class UserServiceImpl implements UserService {
     public User edit(String username, UserEditDTO userEditDTO) {
         User user = userRepository.findByUsername(username).orElseThrow(()->new UsernameDoesNotExistException(username));
         user.setRole(userEditDTO.getRole());
+        user.setName(userEditDTO.getName());
+        user.setSurname(userEditDTO.getSurname());
+        user.setEmail(userEditDTO.getEmail());
+        user.setAddress(userEditDTO.getAddress());
         return user;
     }
 
