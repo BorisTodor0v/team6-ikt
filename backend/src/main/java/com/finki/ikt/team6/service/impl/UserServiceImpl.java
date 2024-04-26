@@ -75,6 +75,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getUserByUsername(String username){
+        return userRepository.findByUsername(username).orElseThrow(()->new UsernameDoesNotExistException(username));
+    }
+
+    @Override
     @Transactional
     public User edit(String username, UserEditDTO userEditDTO) {
         User user = userRepository.findByUsername(username).orElseThrow(()->new UsernameDoesNotExistException(username));
