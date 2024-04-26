@@ -15,6 +15,7 @@ public interface UserService extends UserDetailsService {
     User register(UserRegisterDTO userRegisterDTO, Role role);
     List<User> listAll();
     UserDetailsDTO findByUsername(String username);
+    User getUserByUsername(String username);
     User edit(String username, UserEditDTO userEditDTO);
     User delete(String username);
 }

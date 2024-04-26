@@ -6,8 +6,6 @@ import java.util.List;
 
 public interface CategoryService {
     Category findById(Long id);
-
     List<Category> listAll();
-
     Category create(String name);
 }
