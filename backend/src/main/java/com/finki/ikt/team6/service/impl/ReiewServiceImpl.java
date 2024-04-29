@@ -2,6 +2,7 @@ package com.finki.ikt.team6.service.impl;
 
 import com.finki.ikt.team6.model.Customer;
 import com.finki.ikt.team6.model.Review;
+import com.finki.ikt.team6.model.User;
 import com.finki.ikt.team6.model.exceptions.ReviewNotFoundException;
 import com.finki.ikt.team6.repository.ReviewRepository;
 import com.finki.ikt.team6.service.ReviewService;
@@ -36,19 +37,20 @@ public class ReiewServiceImpl implements ReviewService {
     }
 
     @Override
-    public Review createReview(int rating, String commentar, Long userId, LocalDate date) {
-        Review review=new Review(rating, commentar, userId, date);
+    public Review createReview(int rating, String commentar, User user, LocalDate date, User postUser) {
+        Review review=new Review(rating, commentar, user, date, postUser);
         return  reviewRepository.save(review);
     }
 
     @Override
-    public Review updateReview(Long id, int rating, String commentar, Long userId, LocalDate date) {
+    public Review updateReview(Long id, int rating, String commentar, User user, LocalDate date, User postUser) {
         Review review = findById(id);
 
         review.setRating(rating);
         review.setCommentar(commentar);
-        review.setUserId(userId);
+        review.setUser(user);
         review.setDate(date);
+        review.setPostUser(postUser);
 
         return reviewRepository.save(review);
     }
