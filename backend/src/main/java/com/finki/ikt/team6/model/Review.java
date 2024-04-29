@@ -1,23 +1,28 @@
 package com.finki.ikt.team6.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import org.hibernate.annotations.ValueGenerationType;
 
 import java.time.LocalDate;
 
 @Entity
 public class Review {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private int rating;
     private String commentar;
-    private Long userId;
+    @ManyToOne
+    private User user;
     private LocalDate date;
+    @ManyToOne
+    private  User postUser;
 
-    public Review(int rating, String commentar, Long userId, LocalDate date) {
+    public Review(int rating, String commentar, User user, LocalDate date, User postUser) {
         this.rating = rating;
         this.commentar = commentar;
-        this.userId = userId;
+        this.user=user;
+        this.postUser=postUser;
     }
 
     public Review() {
@@ -48,12 +53,12 @@ public class Review {
         this.commentar = commentar;
     }
 
-    public Long getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public LocalDate getDate() {
@@ -62,5 +67,13 @@ public class Review {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    public User getPostUser() {
+        return postUser;
+    }
+
+    public void setPostUser(User postUser) {
+        this.postUser = postUser;
     }
 }
