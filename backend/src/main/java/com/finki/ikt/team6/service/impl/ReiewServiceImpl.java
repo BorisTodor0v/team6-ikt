@@ -1,6 +1,5 @@
 package com.finki.ikt.team6.service.impl;
 
-import com.finki.ikt.team6.model.Customer;
 import com.finki.ikt.team6.model.Review;
 import com.finki.ikt.team6.model.User;
 import com.finki.ikt.team6.model.exceptions.ReviewNotFoundException;

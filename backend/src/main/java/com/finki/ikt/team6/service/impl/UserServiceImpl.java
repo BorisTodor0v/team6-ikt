@@ -12,9 +12,11 @@ import com.finki.ikt.team6.model.exceptions.UsernameDoesNotExistException;
 import com.finki.ikt.team6.repository.UserRepository;
 import com.finki.ikt.team6.service.UserService;
 import jakarta.transaction.Transactional;
+/*
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
+ */
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -22,11 +24,11 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
+    //private final PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserRepository userRepository){ //, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
+        //this.passwordEncoder = passwordEncoder;
     }
 
     /*  TODO: Remove the "Role" parameter from the function
@@ -53,7 +55,8 @@ public class UserServiceImpl implements UserService {
             throw new UsernameAlreadyExistsException(userRegisterDTO.getUsername());
         }
 
-        User user = new User(userRegisterDTO.getUsername(), passwordEncoder.encode(userRegisterDTO.getPassword()), role);
+        //User user = new User(userRegisterDTO.getUsername(), passwordEncoder.encode(userRegisterDTO.getPassword()), role);
+        User user = new User(userRegisterDTO.getUsername(), userRegisterDTO.getPassword(), role);
 
         user.setName(userRegisterDTO.getName());
         user.setSurname(userRegisterDTO.getSurname());
@@ -98,9 +101,11 @@ public class UserServiceImpl implements UserService {
         userRepository.delete(user);
         return user;
     }
-
+/*
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findByUsername(username).orElseThrow(()->new UsernameNotFoundException(username));
     }
+
+ */
 }

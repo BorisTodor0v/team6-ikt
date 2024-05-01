@@ -1,5 +1,5 @@
 package com.finki.ikt.team6.config;
-
+/*
 import com.finki.ikt.team6.service.UserService;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -43,3 +43,4 @@ public class UsernamePasswordAuthenticationProvider implements AuthenticationPro
     }
 
 }
+ */

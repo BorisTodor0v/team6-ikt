@@ -4,6 +4,7 @@ import com.finki.ikt.team6.model.Role;
 import com.finki.ikt.team6.model.dto.job.JobCreateDTO;
 import com.finki.ikt.team6.model.dto.user.UserRegisterDTO;
 import com.finki.ikt.team6.service.CategoryService;
+import com.finki.ikt.team6.service.JobService;
 import com.finki.ikt.team6.service.UserService;
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Component;
@@ -13,10 +14,12 @@ import java.util.Arrays;
 public class DataInitializer {
     private final UserService userService;
     private final CategoryService categoryService;
+    private final JobService jobService;
 
-    public DataInitializer(UserService userService, CategoryService categoryService) {
+    public DataInitializer(UserService userService, CategoryService categoryService, JobService jobService) {
         this.userService = userService;
         this.categoryService = categoryService;
+        this.jobService = jobService;
     }
 
     /**
@@ -59,6 +62,7 @@ public class DataInitializer {
         createDTO.setExperienceRequired(1);
         createDTO.setCategories(Arrays.asList(1L, 2L, 3L));
         createDTO.setPostedBy("admin");
+        jobService.create(createDTO);
     }
 
 }

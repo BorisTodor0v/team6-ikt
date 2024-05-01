@@ -46,6 +46,7 @@ public class UserRestController {
         }
     }
 
+    //TODO: Move in separate Auth Controller / Service
     /**
      * Takes user credentials from a request body and passes it to register function of the User Service to check their validity.
      * If all credentials are valid, a new user is created and an HTTP status of "CREATED" is returned.

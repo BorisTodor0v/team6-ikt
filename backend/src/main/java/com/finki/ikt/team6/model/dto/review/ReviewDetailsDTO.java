@@ -1,4 +1,4 @@
-package com.finki.ikt.team6.model.review;
+package com.finki.ikt.team6.model.dto.review;
 
 import com.finki.ikt.team6.model.Review;
 import com.finki.ikt.team6.model.User;

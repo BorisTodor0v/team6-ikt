@@ -1,14 +1,13 @@
-package com.finki.ikt.team6.controller.web;
+package com.finki.ikt.team6.controller.rest;
 
 import com.finki.ikt.team6.model.Review;
 import com.finki.ikt.team6.model.exceptions.ReviewNotFoundException;
-import com.finki.ikt.team6.model.review.ReviewCreateDTO;
-import com.finki.ikt.team6.model.review.ReviewDetailsDTO;
-import com.finki.ikt.team6.model.review.ReviewEditDTO;
+import com.finki.ikt.team6.model.dto.review.ReviewCreateDTO;
+import com.finki.ikt.team6.model.dto.review.ReviewDetailsDTO;
+import com.finki.ikt.team6.model.dto.review.ReviewEditDTO;
 import com.finki.ikt.team6.service.ReviewService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,7 +16,11 @@ import java.util.List;
 @CrossOrigin(origins = {"http://localhost:3000"})
 @RequestMapping("/api/review")
 public class ReviewRestController {
-    private ReviewService reviewService;
+    private final ReviewService reviewService;
+
+    public ReviewRestController(ReviewService reviewService) {
+        this.reviewService = reviewService;
+    }
 
     @GetMapping
     public List<Review> listAllReview(){

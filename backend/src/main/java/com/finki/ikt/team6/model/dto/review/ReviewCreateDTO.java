@@ -1,4 +1,4 @@
-package com.finki.ikt.team6.model.review;
+package com.finki.ikt.team6.model.dto.review;
 
 import com.finki.ikt.team6.model.User;
 import lombok.Data;
@@ -12,6 +12,7 @@ public class ReviewCreateDTO {
     private User user;
     private LocalDate date;
     private  User postUser;
+    //TODO: Create date automatically when posting a review
 
     public static ReviewCreateDTO of(int rating, String commentar, User user, LocalDate date, User postUser){
         ReviewCreateDTO reviewCreateDTO=new ReviewCreateDTO();
