@@ -10,9 +10,14 @@ const UserService = {
         return axios.get(`/users/${username}`)
     },
 
-    editUser: (username, role, name, surname, email, address) => {
+    fetchById: (id) => {
+        return axios.get(`/users/id/${id}`)
+    },
+
+    editUserByUsername: (username, role, name, surname, email, address) => {
         return axios.put(`/users/${username}/edit`, {
             "role": role,
+            "username": username,
             "name": name,
             "surname": surname,
             "email": email,
@@ -20,8 +25,23 @@ const UserService = {
         })
     },
 
-    deleteUser: (username) => {
+    editUserById: (id, username, role, name, surname, email, address) => {
+        return axios.put(`/users/id/${id}/edit`, {
+            "role": role,
+            "username": username,
+            "name": name,
+            "surname": surname,
+            "email": email,
+            "address": address
+        })
+    },
+
+    deleteUserByUsername: (username) => {
         return axios.delete(`/users/${username}/delete`)
+    },
+
+    deleteUserById: (id) => {
+        return axios.delete(`/users/id/${id}/delete`)
     }
 
 }

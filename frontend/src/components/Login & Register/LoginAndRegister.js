@@ -8,9 +8,12 @@ const LoginAndRegister = (props) => {
             <Components.SignUpContainer signinIn={signIn}>
                 <Components.Form>
                     <Components.Title>Креирај профил</Components.Title>
-                    <Components.Input type='text' placeholder='Име и презиме' />
+                    <Components.Input type='text' placeholder='Име' />
+                    <Components.Input type='text' placeholder='Презиме' />
                     <Components.Input type='email' placeholder='E-пошта' />
+                    <Components.Input type='text' placeholder='Корисничко име' />
                     <Components.Input type='password' placeholder='Лозинка' />
+                    <Components.Input type='password' placeholder='Потврди лозинка' />
                     <Components.Button>РЕГИСТРИРАЈ СЕ</Components.Button>
                 </Components.Form>
             </Components.SignUpContainer>

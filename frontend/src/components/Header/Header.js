@@ -7,22 +7,18 @@ const Header = () => {
     return(
         <header>
             <nav className="nav">
-                <a href="/" className="SiteLogo">
-                    <img src={`${process.env.PUBLIC_URL}/images/logo.jpg`} alt="Kindly Logo"
-                         style={{width: "100px" }}/> {/* display the logo image with a smaller width */}
-                </a>
+                <Link to={"/"} className={"SiteLogo"}>
+                    <img src={`${process.env.PUBLIC_URL}/images/logo.jpg`} alt="Kindly Logo" style={{width: "100px"}}/>
+                </Link>
                 <ul>
                     <li>
-                        <Link to={"#"}>Дома</Link>
+                        <Link to={"/"}>Дома</Link>
                     </li>
                     <li>
                         <Link to={"#"}>Барај луѓе</Link>
                     </li>
                     <li>
-                        <Link to={"#"}>Најави се</Link>
-                    </li>
-                    <li>
-                        <Link to={"#"}>Регистрација</Link>
+                        <Link to={"/auth"}>Најава/Регистрација</Link>
                     </li>
                     <li>
                         <Link to={"#"}>Одјави се</Link>
