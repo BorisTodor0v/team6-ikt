@@ -1,6 +1,5 @@
 package com.finki.ikt.team6.controller.rest;
 
-import com.finki.ikt.team6.model.Job;
 import com.finki.ikt.team6.model.dto.job.JobCreateDTO;
 import com.finki.ikt.team6.model.dto.job.JobDetailsDTO;
 import com.finki.ikt.team6.model.dto.job.JobEditDTO;
@@ -25,8 +24,8 @@ public class JobsRestController {
     }
 
     @GetMapping
-    public List<Job> listAllJobs(){
-        return this.jobService.listAll();
+    public List<JobDetailsDTO> listAllJobs(){
+        return JobDetailsDTO.of(this.jobService.listAll());
     }
 
     /**

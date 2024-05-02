@@ -5,10 +5,7 @@ import com.finki.ikt.team6.model.User;
 import com.finki.ikt.team6.model.dto.user.UserDetailsDTO;
 import com.finki.ikt.team6.model.dto.user.UserEditDTO;
 import com.finki.ikt.team6.model.dto.user.UserRegisterDTO;
-import com.finki.ikt.team6.model.exceptions.InvalidUsernameOrPasswordException;
-import com.finki.ikt.team6.model.exceptions.PasswordsDoNotMatchException;
-import com.finki.ikt.team6.model.exceptions.UsernameAlreadyExistsException;
-import com.finki.ikt.team6.model.exceptions.UsernameDoesNotExistException;
+import com.finki.ikt.team6.model.exceptions.*;
 import com.finki.ikt.team6.repository.UserRepository;
 import com.finki.ikt.team6.service.UserService;
 import jakarta.transaction.Transactional;
@@ -78,8 +75,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserDetailsDTO findById(Long id) {
+        User user = userRepository.findById(id).orElseThrow(()->new UserIdDoesNotExistException(id));
+        return UserDetailsDTO.of(user);
+    }
+
+    @Override
     public User getUserByUsername(String username){
         return userRepository.findByUsername(username).orElseThrow(()->new UsernameDoesNotExistException(username));
+    }
+
+    @Override
+    public User getUserById(Long id) {
+        return userRepository.findById(id).orElseThrow(()->new UserIdDoesNotExistException(id));
     }
 
     @Override
@@ -87,6 +95,20 @@ public class UserServiceImpl implements UserService {
     public User edit(String username, UserEditDTO userEditDTO) {
         User user = userRepository.findByUsername(username).orElseThrow(()->new UsernameDoesNotExistException(username));
         user.setRole(userEditDTO.getRole());
+        user.setUsername(userEditDTO.getUsername());
+        user.setName(userEditDTO.getName());
+        user.setSurname(userEditDTO.getSurname());
+        user.setEmail(userEditDTO.getEmail());
+        user.setAddress(userEditDTO.getAddress());
+        return user;
+    }
+
+    @Override
+    @Transactional
+    public User edit(Long id, UserEditDTO userEditDTO) {
+        User user = userRepository.findById(id).orElseThrow(()->new UserIdDoesNotExistException(id));
+        user.setRole(userEditDTO.getRole());
+        user.setUsername(userEditDTO.getUsername());
         user.setName(userEditDTO.getName());
         user.setSurname(userEditDTO.getSurname());
         user.setEmail(userEditDTO.getEmail());
@@ -100,6 +122,18 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findByUsername(username).orElseThrow(()->new UsernameDoesNotExistException(username));
         userRepository.delete(user);
         return user;
+    }
+
+    @Override
+    public User delete(Long id) {
+        User user = userRepository.findById(id).orElseThrow(()->new UserIdDoesNotExistException(id));
+        userRepository.delete(user);
+        return user;
+    }
+
+    @Override
+    public User findByCredentials(String email, String password) {
+        return userRepository.findByEmailAndPassword(email, password).orElseThrow(InvalidEmailOrPasswordException::new);
     }
 /*
     @Override

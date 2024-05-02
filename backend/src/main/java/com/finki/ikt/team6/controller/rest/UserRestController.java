@@ -28,18 +28,27 @@ public class UserRestController {
      * @return All users
      */
     @GetMapping
-    public List<User> listAllUsers(){
-        return this.userService.listAll();
+    public List<UserDetailsDTO> listAllUsers(){
+        return UserDetailsDTO.of(this.userService.listAll());
     }
 
     /**
-     * @param username
-     * @return Details for the corresponding user
+     * @return Details for the user with the provided username
      */
     @GetMapping("/{username}")
     public ResponseEntity<?> findByUsername(@PathVariable String username){
         try{
             UserDetailsDTO user = this.userService.findByUsername(username);
+            return new ResponseEntity<>(user, HttpStatus.FOUND);
+        } catch (UsernameDoesNotExistException e){
+            return ResponseEntity.status(e.getStatus()).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/id/{id}")
+    public ResponseEntity<?> findByUsername(@PathVariable Long id){
+        try{
+            UserDetailsDTO user = this.userService.findById(id);
             return new ResponseEntity<>(user, HttpStatus.FOUND);
         } catch (UsernameDoesNotExistException e){
             return ResponseEntity.status(e.getStatus()).body(e.getMessage());
@@ -91,6 +100,16 @@ public class UserRestController {
         }
     }
 
+    @PutMapping("/id/{id}/edit")
+    public ResponseEntity<?> editUserDetails(@PathVariable Long id, @RequestBody UserEditDTO userEditDTO){
+        try{
+            User user = this.userService.edit(id, userEditDTO);
+            return new ResponseEntity<>(user, HttpStatus.OK);
+        } catch (UsernameDoesNotExistException e){
+            return ResponseEntity.status(e.getStatus()).body(e.getMessage());
+        }
+    }
+
     /*
         TODO: Make this function take the currently logged in user to see if they have permissions to delete
             A user can delete their own account
@@ -111,4 +130,13 @@ public class UserRestController {
         }
     }
 
+    @DeleteMapping("/id/{id}/delete")
+    public ResponseEntity<?> deleteUser(@PathVariable Long id){
+        try{
+            User user = this.userService.delete(id);
+            return new ResponseEntity<>(user, HttpStatus.OK);
+        } catch (UsernameDoesNotExistException e){
+            return ResponseEntity.status(e.getStatus()).body(e.getMessage());
+        }
+    }
 }

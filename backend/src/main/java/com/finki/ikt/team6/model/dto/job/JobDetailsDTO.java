@@ -5,6 +5,7 @@ import com.finki.ikt.team6.model.Job;
 import com.finki.ikt.team6.model.dto.user.UserDetailsDTO;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,6 +33,14 @@ public class JobDetailsDTO {
         jobDetailsDTO.setCategories(job.getCategories());
         jobDetailsDTO.setPostedBy(UserDetailsDTO.of(job.getPostedBy()));
         return jobDetailsDTO;
+    }
+
+    public static List<JobDetailsDTO> of(List<Job> jobs){
+        List<JobDetailsDTO> jobDetailsDTOS = new ArrayList<>();
+        for (Job job: jobs) {
+            jobDetailsDTOS.add(JobDetailsDTO.of(job));
+        }
+        return jobDetailsDTOS;
     }
 
 }

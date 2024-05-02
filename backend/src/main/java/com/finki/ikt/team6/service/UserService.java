@@ -15,7 +15,12 @@ public interface UserService { //extends UserDetailsService {
     User register(UserRegisterDTO userRegisterDTO, Role role);
     List<User> listAll();
     UserDetailsDTO findByUsername(String username);
+    UserDetailsDTO findById(Long id);
     User getUserByUsername(String username);
+    User getUserById(Long id);
     User edit(String username, UserEditDTO userEditDTO);
+    User edit(Long id, UserEditDTO userEditDTO);
     User delete(String username);
+    User delete(Long id);
+    User findByCredentials(String email, String password);
 }
