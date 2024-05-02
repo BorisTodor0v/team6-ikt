@@ -4,12 +4,16 @@ import com.finki.ikt.team6.model.Role;
 import com.finki.ikt.team6.model.User;
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Used as a ResponseBody that contains necessary details of a user. Defined like this to avoid sending passwords and other sensitive data when looking up a user.
  * @Returns: Username, role of the user, first name, last name, email address, residential address and grade from reviews.
  */
 @Data
 public class UserDetailsDTO {
+    private Long id;
     private String username;
     private Role role;
     private String name;
@@ -20,6 +24,7 @@ public class UserDetailsDTO {
 
     public static UserDetailsDTO of(User user){
         UserDetailsDTO userDetails = new UserDetailsDTO();
+        userDetails.id = user.getId();
         userDetails.username = user.getUsername();
         userDetails.role = user.getRole();
         userDetails.name = user.getName();
@@ -28,5 +33,13 @@ public class UserDetailsDTO {
         userDetails.address = user.getAddress();
         userDetails.grade = user.getGrade();
         return userDetails;
+    }
+
+    public static List<UserDetailsDTO> of(List<User> users){
+        List<UserDetailsDTO> userDetailsDTOS = new ArrayList<>();
+        for (User user : users) {
+            userDetailsDTOS.add(UserDetailsDTO.of(user));
+        }
+        return userDetailsDTOS;
     }
 }

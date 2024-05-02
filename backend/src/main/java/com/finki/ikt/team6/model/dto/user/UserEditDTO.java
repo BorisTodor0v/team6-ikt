@@ -10,6 +10,7 @@ import lombok.Data;
 @Data
 public class UserEditDTO {
     private Role role;
+    private String username;
     private String name;
     private String surname;
     private String email;
@@ -18,6 +19,7 @@ public class UserEditDTO {
     public static UserEditDTO of(User user){
         UserEditDTO userDetails = new UserEditDTO();
         userDetails.role = user.getRole();
+        userDetails.username = user.getUsername();
         userDetails.name = user.getName();
         userDetails.surname = user.getSurname();
         userDetails.email = user.getSurname();
