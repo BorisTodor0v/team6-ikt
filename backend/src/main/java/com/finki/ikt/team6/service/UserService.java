@@ -6,6 +6,7 @@ import com.finki.ikt.team6.model.dto.user.UserDetailsDTO;
 import com.finki.ikt.team6.model.dto.user.UserEditDTO;
 import com.finki.ikt.team6.model.dto.user.UserRegisterDTO;
 //import org.springframework.security.core.userdetails.UserDetailsService;
+import com.finki.ikt.team6.model.dto.user.UserServiceFilterDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,4 +24,5 @@ public interface UserService { //extends UserDetailsService {
     User delete(String username);
     User delete(Long id);
     User findByCredentials(String email, String password);
+    List<UserDetailsDTO> findServiceProviders(UserServiceFilterDTO filterDTO);
 }

@@ -32,6 +32,22 @@ public class User { //implements UserDetails {
     private String address;
     private double grade;
 
+    // Services offered
+    private boolean offersChildCare;
+    private boolean offersElderCare;
+    private boolean offersPetCare;
+
+    // Salary Range
+    private double minSalary;
+    private double maxSalary;
+
+    // Traits
+    private boolean trainedInFirstAid;
+    private boolean comfortableWithPets;
+    private boolean highEducation;
+    private boolean hasCar;
+    private boolean nonSmoker;
+
     /*
     private boolean isAccountNonExpired = true;
     private boolean isAccountNonLocked = true;

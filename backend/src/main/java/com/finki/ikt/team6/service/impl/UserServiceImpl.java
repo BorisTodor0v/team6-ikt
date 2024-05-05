@@ -5,6 +5,7 @@ import com.finki.ikt.team6.model.User;
 import com.finki.ikt.team6.model.dto.user.UserDetailsDTO;
 import com.finki.ikt.team6.model.dto.user.UserEditDTO;
 import com.finki.ikt.team6.model.dto.user.UserRegisterDTO;
+import com.finki.ikt.team6.model.dto.user.UserServiceFilterDTO;
 import com.finki.ikt.team6.model.exceptions.*;
 import com.finki.ikt.team6.repository.UserRepository;
 import com.finki.ikt.team6.service.UserService;
@@ -16,6 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  */
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -142,4 +144,16 @@ public class UserServiceImpl implements UserService {
     }
 
  */
+    @Override
+    public List<UserDetailsDTO> findServiceProviders(UserServiceFilterDTO filterDTO) {
+        List<UserDetailsDTO> serviceProviders = userRepository.findByMinSalaryGreaterThanEqualAndMaxSalaryLessThanEqualAndTrainedInFirstAidAndComfortableWithPetsAndHighEducationAndHasCarAndNonSmokerAndOffersChildCareAndOffersElderCareAndOffersPetCare(
+                        filterDTO.getMinSalary(), filterDTO.getMaxSalary(),
+                        filterDTO.isTrainedInFirstAid(), filterDTO.isComfortableWithPets(), filterDTO.isHighEducation(),
+                        filterDTO.isHasCar(), filterDTO.isNonSmoker(),
+                        filterDTO.isRequiresChildCare(), filterDTO.isRequiresElderCare(), filterDTO.isRequiresPetCare())
+                .stream()
+                .map(UserDetailsDTO::of)
+                .collect(Collectors.toList());
+        return serviceProviders;
+    }
 }
