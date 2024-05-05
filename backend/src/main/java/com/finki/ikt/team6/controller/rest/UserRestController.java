@@ -5,6 +5,7 @@ import com.finki.ikt.team6.model.User;
 import com.finki.ikt.team6.model.dto.user.UserDetailsDTO;
 import com.finki.ikt.team6.model.dto.user.UserEditDTO;
 import com.finki.ikt.team6.model.dto.user.UserRegisterDTO;
+import com.finki.ikt.team6.model.dto.user.UserServiceFilterDTO;
 import com.finki.ikt.team6.model.exceptions.*;
 import com.finki.ikt.team6.service.UserService;
 import org.springframework.http.HttpStatus;
@@ -139,4 +140,20 @@ public class UserRestController {
             return ResponseEntity.status(e.getStatus()).body(e.getMessage());
         }
     }
+
+    @PostMapping("/filter")
+    public ResponseEntity<?> filterUsers(@RequestBody UserServiceFilterDTO filterDTO){
+        try{
+            List<UserDetailsDTO> filteredUsers = userService.findServiceProviders(filterDTO);
+            if(filteredUsers.isEmpty()){
+                throw new UserFilteringException("No users found matching the provided criteria");
+            }
+            return ResponseEntity.ok(filteredUsers);
+        } catch (UserFilteringException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        } catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred while filtering users: " + e.getMessage());
+        }
+    }
+
 }
