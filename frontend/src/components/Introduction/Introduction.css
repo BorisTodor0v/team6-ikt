@@ -1,0 +1,38 @@
+.introduction-container {
+    display: flex;
+    height: 100%;
+    background-color: #99d9d9;
+
+}
+
+.info-container {
+    width: 35%;
+    height: 20%;
+    margin: 15em 3em;
+}
+
+.info-container h1 {
+    font-size: 5.5em;
+    font-weight: normal;
+    color: white;
+}
+
+
+.info-container p {
+    font-size: 2em;
+    padding: 0.3em 0 1em 0;
+    color: #000000;
+}
+
+.background-container {
+    background-image: url('../../assets/family-cover-photo.jpeg');
+    background-size: cover;
+    width: 65%;
+    height: 100%;
+    background-repeat: no-repeat;
+}
+
+.logo-img {
+    margin-bottom: 1.5em;
+    width: 65%;
+}

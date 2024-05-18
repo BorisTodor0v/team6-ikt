@@ -15,13 +15,18 @@ const Header = () => {
                         <Link to={"/"}>Дома</Link>
                     </li>
                     <li>
-                        <Link to={"#"}>Барај луѓе</Link>
+                        <Link to={"/users"}>Листај корисници</Link>
                     </li>
                     <li>
-                        <Link to={"/auth"}>Најава/Регистрација</Link>
+                        <Link to={"/services"}>Услуги</Link>
                     </li>
                     <li>
-                        <Link to={"#"}>Одјави се</Link>
+                        <Link to={"/about-us"}>За нас</Link>
+                    </li>
+                    <li>
+                        <Link to={"/contact"}>Контакт</Link>
+                    </li>
+                    <li>
                     </li>
                 </ul>
             </nav>
