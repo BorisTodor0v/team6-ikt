@@ -1,7 +1,9 @@
 package com.finki.ikt.team6.config;
 
 import com.finki.ikt.team6.model.Role;
+import com.finki.ikt.team6.model.User;
 import com.finki.ikt.team6.model.dto.job.JobCreateDTO;
+import com.finki.ikt.team6.model.dto.user.UserEditDTO;
 import com.finki.ikt.team6.model.dto.user.UserRegisterDTO;
 import com.finki.ikt.team6.service.CategoryService;
 import com.finki.ikt.team6.service.JobService;
@@ -37,6 +39,17 @@ public class DataInitializer {
         adminDTO.setEmail("admin@kindly.com");
         adminDTO.setAddress("home");
         userService.register(adminDTO, Role.ADMIN);
+        User user = userService.listAll().get(userService.listAll().size()-1);
+        UserEditDTO userEditDTO = UserEditDTO.of(user);
+        userEditDTO.setMinSalary(10.0);
+        userEditDTO.setMaxSalary(15.0);
+        userEditDTO.setGrade(3);
+        userEditDTO.setOffersPetCare(true);
+        userEditDTO.setHighEducation(true);
+        userEditDTO.setNonSmoker(true);
+        userEditDTO.setComfortableWithPets(true);
+        userService.edit(user.getId(), userEditDTO);
+
         UserRegisterDTO userDTO = new UserRegisterDTO();
         userDTO.setUsername("user");
         userDTO.setPassword("user");
@@ -44,8 +57,21 @@ public class DataInitializer {
         userDTO.setName("Test");
         userDTO.setSurname("User");
         userDTO.setEmail("testuser@email.com");
-        userDTO.setAddress("");
+        userDTO.setAddress("Test address, 3, Address place");
         userService.register(userDTO, Role.USER);
+        user = userService.listAll().get(userService.listAll().size()-1);
+        userEditDTO = UserEditDTO.of(user);
+        userEditDTO.setMinSalary(13.0);
+        userEditDTO.setMaxSalary(18.0);
+        userEditDTO.setGrade(6);
+        userEditDTO.setOffersChildCare(true);
+        userEditDTO.setOffersPetCare(true);
+        userEditDTO.setHighEducation(true);
+        userEditDTO.setNonSmoker(true);
+        userEditDTO.setHasCar(true);
+        userEditDTO.setTrainedInFirstAid(true);
+        userService.edit(user.getId(), userEditDTO);
+
 
         //Categories
         categoryService.create("Childcare");

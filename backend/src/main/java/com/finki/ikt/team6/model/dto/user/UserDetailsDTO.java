@@ -21,6 +21,19 @@ public class UserDetailsDTO {
     private String email;
     private String address;
     private double grade;
+    // Services offered
+    private boolean offersChildCare;
+    private boolean offersElderCare;
+    private boolean offersPetCare;
+    // Salary Range
+    private double minSalary;
+    private double maxSalary;
+    // Traits
+    private boolean trainedInFirstAid;
+    private boolean comfortableWithPets;
+    private boolean highEducation;
+    private boolean hasCar;
+    private boolean nonSmoker;
 
     public static UserDetailsDTO of(User user){
         UserDetailsDTO userDetails = new UserDetailsDTO();
@@ -32,6 +45,19 @@ public class UserDetailsDTO {
         userDetails.email = user.getEmail();
         userDetails.address = user.getAddress();
         userDetails.grade = user.getGrade();
+        // Services offered
+        userDetails.offersChildCare = user.isOffersChildCare();
+        userDetails.offersElderCare = user.isOffersElderCare();
+        userDetails.offersPetCare = user.isOffersPetCare();
+        // Salary Range
+        userDetails.minSalary = user.getMinSalary();
+        userDetails.maxSalary = user.getMaxSalary();
+        // Traits
+        userDetails.trainedInFirstAid = user.isTrainedInFirstAid();
+        userDetails.comfortableWithPets = user.isComfortableWithPets();
+        userDetails.highEducation = user.isHighEducation();
+        userDetails.hasCar = user.isHasCar();
+        userDetails.nonSmoker = user.isNonSmoker();
         return userDetails;
     }
 
