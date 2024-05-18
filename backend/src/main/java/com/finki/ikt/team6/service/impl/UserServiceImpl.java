@@ -115,6 +115,20 @@ public class UserServiceImpl implements UserService {
         user.setSurname(userEditDTO.getSurname());
         user.setEmail(userEditDTO.getEmail());
         user.setAddress(userEditDTO.getAddress());
+        user.setGrade(userEditDTO.getGrade());
+        // Services offered
+        user.setOffersChildCare(userEditDTO.isOffersChildCare());
+        user.setOffersElderCare(userEditDTO.isOffersElderCare());
+        user.setOffersPetCare(userEditDTO.isOffersPetCare());
+        // Salary Range
+        user.setMinSalary(userEditDTO.getMinSalary());
+        user.setMaxSalary(userEditDTO.getMaxSalary());
+        // Traits
+        user.setTrainedInFirstAid(userEditDTO.isTrainedInFirstAid());
+        user.setComfortableWithPets(userEditDTO.isComfortableWithPets());
+        user.setHighEducation(userEditDTO.isHighEducation());
+        user.setHasCar(userEditDTO.isHasCar());
+        user.setNonSmoker(userEditDTO.isNonSmoker());
         return user;
     }
 
