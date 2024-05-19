@@ -14,7 +14,7 @@ export default function AboutUs() {
             </p>
             <div className="btn-div">
                 <Button>
-                    <Link to={"/services"}>
+                    <Link to={"/services"} style={{ textDecoration: 'none' }}>
                         Дознај Повеќе
                     </Link>
                 </Button>

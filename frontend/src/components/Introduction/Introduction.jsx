@@ -11,7 +11,7 @@ export default function Introduction() {
                 {/*<h1>Kindly</h1>*/}
                 <p>Обединување на семејства со извондредни локални негуватели.</p>
                 <Button>
-                    <Link to={"/services"}>
+                    <Link to={"/services"} style={{ textDecoration: 'none' }}>
                         Пронајдете грижа тука
                     </Link>
                 </Button>
