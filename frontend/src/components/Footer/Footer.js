@@ -7,21 +7,17 @@ import {
     FooterLink,
     Heading,
 } from "./FooterStyles";
+import logo from '../../assets/logo.svg';
  
 const Footer = () => {
     return (
         <Box>
-            <h1
-                style={{
-                    marginLeft: "100px",
-                    marginTop: "10px",
-                }}
-            >
-                Kindly
-            </h1>
             <FooterContainer>
                 <Row>
                     <Column>
+                        <Heading>
+                            <img src={logo} alt="Kindly Logo" style={{width: "150px"}}/> 
+                        </Heading>
                     </Column>
                     <Column>
                         <Heading>About Us</Heading>

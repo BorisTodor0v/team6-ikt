@@ -12,7 +12,6 @@ import Services from "../Services/Services";
 import Footer from "../Footer/Footer";
 
 class App extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -28,11 +27,11 @@ class App extends Component {
                     <div>
                         <Routes>
                             <Route path={"/"} element={<Introduction/>}/>
-                            <Route path={"/users"} element={<ListUsers users={this.state.users}/>}/>
+                            <Route path={"/offers"} element={<ListUsers users={this.state.users}/>}/>
                             <Route path={"/auth"} element={<LoginAndRegister/>}/>
                             <Route path={"/about-us"} element={<AboutUs/>}/>
                             <Route path={"/contact"} element={<Contact/>}/>
-                            <Route path={"/services"} element={<Services/>}/>
+                            <Route path={"/services"} element={<Services onSelect={this.filterUsers}/>}/>
                         </Routes>
                     </div>
                 </main>
@@ -49,8 +48,25 @@ class App extends Component {
         })
     }
 
+    filterUsers = (service) => {
+        console.log('Selected service number: ', service)
+
+        const update = (data) => {
+            this.setState({ users: data.data }, () => {
+            });
+        };
+
+        if (service === 1) {
+            UserService.findAllChildCare().then(update);
+        } else if (service === 2) {
+            UserService.findAllElderCare().then(update);
+        } else {
+            UserService.findAllPetCare().then(update);
+        }
+    };
+
+
     componentDidMount() {
-        this.getAllUsers();
     }
 }
 

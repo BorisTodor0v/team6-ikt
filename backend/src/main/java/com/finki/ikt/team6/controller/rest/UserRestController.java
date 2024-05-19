@@ -156,4 +156,37 @@ public class UserRestController {
         }
     }
 
+    @GetMapping("/filter/child-care")
+    public ResponseEntity<?> findChildCare(){
+        try{
+            List<UserDetailsDTO> filteredUsers = userService.findChildCare();
+            return ResponseEntity.ok(filteredUsers);
+        } catch (UserFilteringException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        } catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred while filtering users: " + e.getMessage());
+        }
+    }
+
+    @GetMapping("/filter/elder-care")
+    public ResponseEntity<?> findElderCare(){
+        try{
+            List<UserDetailsDTO> filteredUsers = userService.findElderCare();
+            return ResponseEntity.ok(filteredUsers);
+        } catch (UserFilteringException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        } catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred while filtering users: " + e.getMessage());
+        }
+    }
+
+    @GetMapping("/filter/pet-care")
+    public ResponseEntity<?> findPetCare(){
+        try{
+            List<UserDetailsDTO> filteredUsers = userService.findPetCare();
+            return ResponseEntity.ok(filteredUsers);
+        } catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred while filtering users: " + e.getMessage());
+        }
+    }
 }

@@ -1,0 +1,29 @@
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 650px;
+    margin: auto;
+    text-align: center;
+    font-family: arial;
+    padding: 2px;
+  }
+  
+  .price {
+    color: grey;
+    font-size: 18px;
+  }
+
+  .trait {
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 2px;
+    background-color: rgb(236, 232, 232);
+    text-align: center;
+    width: 100%;
+  }
+
+  .trait-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+  }
