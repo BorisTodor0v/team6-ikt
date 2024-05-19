@@ -42,7 +42,19 @@ const UserService = {
 
     deleteUserById: (id) => {
         return axios.delete(`/users/id/${id}/delete`)
-    }
+    },
+
+    findAllChildCare: () => {
+        return axios.get(`/users/filter/child-care`)
+    },
+
+    findAllElderCare: () => {
+        return axios.get(`/users/filter/elder-care`)
+    },
+
+    findAllPetCare: () => {
+        return axios.get(`/users/filter/pet-care`)
+    },
 
 }
 

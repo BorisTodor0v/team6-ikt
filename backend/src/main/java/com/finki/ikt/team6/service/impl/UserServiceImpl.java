@@ -170,4 +170,29 @@ public class UserServiceImpl implements UserService {
                 .collect(Collectors.toList());
         return serviceProviders;
     }
+
+    @Override
+    public List<UserDetailsDTO> findChildCare() {
+        return userRepository.findUsersByOffersChildCare(true)
+                .stream()
+                .map(UserDetailsDTO::of)
+                .toList();
+    }
+
+    @Override
+    public List<UserDetailsDTO> findElderCare() {
+        return userRepository.findUsersByOffersElderCare(true)
+                .stream()
+                .map(UserDetailsDTO::of)
+                .toList();
+    }
+
+    @Override
+    public List<UserDetailsDTO> findPetCare() {
+        return userRepository.findUsersByOffersPetCare(true)
+                .stream()
+                .map(UserDetailsDTO::of)
+                .toList();
+    }
+
 }

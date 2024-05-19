@@ -17,4 +17,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
             Boolean trainedInFirstAid, Boolean comfortableWithPets, Boolean highEducation,
             Boolean hasCar, Boolean nonSmoker,
             Boolean offersChildCare, Boolean offersElderCare, Boolean offersPetCare);
+    List<User> findUsersByOffersChildCare(Boolean offerChildCare);
+    List<User> findUsersByOffersElderCare(Boolean offerElderCare);
+    List<User> findUsersByOffersPetCare(Boolean offersPetCare);
 }

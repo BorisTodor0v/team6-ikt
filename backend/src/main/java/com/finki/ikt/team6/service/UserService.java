@@ -25,4 +25,7 @@ public interface UserService { //extends UserDetailsService {
     User delete(Long id);
     User findByCredentials(String email, String password);
     List<UserDetailsDTO> findServiceProviders(UserServiceFilterDTO filterDTO);
+    List<UserDetailsDTO> findChildCare();
+    List<UserDetailsDTO> findElderCare();
+    List<UserDetailsDTO> findPetCare();
 }
