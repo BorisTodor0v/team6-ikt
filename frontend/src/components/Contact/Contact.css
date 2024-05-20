@@ -1,0 +1,33 @@
+.contact-container {
+    display: flex;
+    height: 40%;
+    padding: 15em 6em;
+    background-image: url('../../assets/footer-cover-1.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    justify-content: space-evenly;
+
+    color: #0d203a;
+}
+
+.contact-container h1{
+    width: 50%;
+    font-size: 5em;
+    padding-top: 1em;
+}
+
+.contact-info-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
+}
+
+.contact-info-container p{
+    font-size: 1.5em;
+}
+
+.contact-info-container div p:first-of-type{
+    font-weight: bold;
+}

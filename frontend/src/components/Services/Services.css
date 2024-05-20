@@ -1,0 +1,27 @@
+.services-container {
+    height: 95%;
+    padding-top: 4em;
+    background-color: #99d9d9;
+}
+
+.services-container h1 {
+    font-size: 3em;
+    width: 90%;
+    margin: 0 auto;
+    font-weight: bold;
+
+}
+
+.services-info {
+    font-size: 2.5em;
+    width: 90%;
+    margin: 0 auto;
+    padding-top: 0.5em;
+}
+
+.services-buttons-container{
+    display: flex;
+    height: 70%;
+    align-items: center;
+    justify-content: center;
+}
